@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .mainbody{
+            background-color: #FFFFDD;
+        }
+        .titlebar{
+            background-color: #D2DE32;
+        }
+        .body {
+            margin: 0;
+            padding: 0;
+            }
+        .logoutcolor{
+            background-color: rgb(197, 46, 46);
+            border-radius: 10%;
+            color: white;
+            
+        }
+        .innerframe{
+            background-color: #016A70;
+            margin: 14% 20%;
+            height: 500px;
+            border-radius: 20px;
+        }
+        .welcome{
+          position: relative;
+          left: 50px;
+          top: 50px;
+        }
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body class="mainbody">
+        <div style="padding:0px; margin:0px;height: 20%">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light " style="padding: 0px;" >
+                <div class="container-fluid titlebar" style="padding:10px;">
+                  <a class="navbar-brand" href="#">Jujutsu</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Recent</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">All logs</a>
+                      </li>
+                      <li class="nav-item dropdown">
+                      </li>
+                    </ul>
+                    <form class="d-flex logoutcolor" >
+                      <button class="btn btn-outline-success" type="submit" style="color: #ffffff">Logout</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
+            </div>
+        <div>
+            Welcome, {{Username}}!
+        </div>
+        <div class="innerframe">
+        </div>
+        
+        
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
+</body>
+</html>
