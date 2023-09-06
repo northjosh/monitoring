@@ -102,6 +102,14 @@ def home():
 
     if not session.get("name"):
         redirect("/login")
-    
+        
+    logs = readfile()
+    return render_template("home1.html", logs=logs)
 
-    return render_template("home2.html")
+
+@app.route("/activity/<date>", methods=["GET"])
+def activity(date):
+   activity = readfile(date)
+
+   return(render_template("home2.html", activity=activity))
+
