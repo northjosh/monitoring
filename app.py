@@ -1,8 +1,9 @@
 from flask import Flask, request, render_template, redirect, session, jsonify
 import requests
+from datetime import datetime
 from flask_mqtt import Mqtt
 
-r = requests.get()
+# r = requests.get()
 
 notifications = False
 
@@ -27,22 +28,33 @@ logs = []
 
 keys = {"josh": "josh123"}
 
-topic = 'testing'
-
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
     if rc == 0:
         print('Connected')
-        mqtt_client.subscribe(topic)
+        mqtt_client.subscribe("motion")
     else:
         print("Couldn't connect. Error Code:", rc)
+
 
 @mqtt_client.on_message()
 def handle_mqtt_message(client, userdata, message):
     data = dict(topic=message.topic, payload=message.payload.decode('utf-8'))
 
+    today = datetime.utcnow()
+
+    date = today.strftime("%d-%m-%Y")
+
+    try:
+        new = open(f"{date}.txt", 'x')
+        new.write(data['payload'])
+        new.close()
+    except FileExistsError:
+        new.write(data['payload'])
+        new.close()
     print(f'Message received on topic {data["topic"]}: with payload: {data["payload"]}')
+
 
 @app.post("/message")
 def publish():
@@ -51,13 +63,15 @@ def publish():
 
     return jsonify({'code': result[0]})
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
     """
     Handles user authentication 
 
     """
-    if request.method == 'POST':
+    if request.method == "POST":
         if keys.get(request.form["username"]) == None:
             return render_template("login.html",message="User does not exist")
         elif keys.get(request.form["username"]) != request.form['password']:
@@ -82,7 +96,7 @@ def logout():
     return redirect("/login")
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
     """ Returns the user homepage"""
 
@@ -90,7 +104,4 @@ def home():
         redirect("/login")
     
 
-    return render_template("home.html")
-
-
-
+    return render_template("home2.html")
