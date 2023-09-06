@@ -61,4 +61,4 @@ def writefile(data):
 
 writefile({"topic": "hello", "payload": "Motion "})
 
-readfile("2023-09-06")
+# readfile("2023-09-06")

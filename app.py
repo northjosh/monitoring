@@ -2,8 +2,6 @@ from flask import Flask, request, render_template, redirect, session, jsonify
 import requests
 from datetime import datetime
 from flask_mqtt import Mqtt
-from log import Log
-from readwrite import readfile, writefile
 
 # r = requests.get()
 
@@ -17,12 +15,16 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config['MQTT_BROKER_URL'] = '197.255.72.187'
 app.config['MQTT_BROKER_PORT'] = 1883
+# app.config['MQTT_USERNAME'] = 'north'
+# app.config['MQTT_PASSWORD'] = 'josh'
 app.config['MQTT_KEEPALIVE'] = 5
 app.config['MQTT_TLS_ENABLED'] = False
 
 
 Session(app)
 mqtt_client = Mqtt(app)
+
+logs = []
 
 keys = {"josh": "josh123"}
 
@@ -40,7 +42,17 @@ def handle_connect(client, userdata, flags, rc):
 def handle_mqtt_message(client, userdata, message):
     data = dict(topic=message.topic, payload=message.payload.decode('utf-8'))
 
-    writefile(data)
+    today = datetime.utcnow()
+
+    date = today.strftime("%d-%m-%Y")
+
+    try:
+        new = open(f"{date}.txt", 'x')
+        new.write(data['payload'])
+        new.close()
+    except FileExistsError:
+        new.write(data['payload'])
+        new.close()
     print(f'Message received on topic {data["topic"]}: with payload: {data["payload"]}')
 
 
@@ -90,15 +102,6 @@ def home():
 
     if not session.get("name"):
         redirect("/login")
-
     
-    logs = readfile()
-    return render_template("home1.html", logs=logs)
 
-
-@app.route("/activity/<date>", methods=["GET"])
-def activity(date):
-   activity = readfile(date)
-
-   return(render_template("home2.html", activity=activity))
-
+    return render_template("home2.html")
