@@ -1,14 +1,14 @@
-// alert("hello")
+// const msg =  document.getElementById('alert')
+const date = new Date()
 
-const msg =  document.getElementById('alert')
+const current = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`
 
-// console.log(msg.innerHTML)
+console.log(current)
 
 
-
-if( msg.innerHTML != ''){
-    msg.style.visibility = 'visible'
-}
+// if( msg.innerHTML != ''){
+//     msg.style.visibility = 'visible'
+// }
 
 
 
