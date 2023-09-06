@@ -90,8 +90,7 @@ def home():
 
     if not session.get("name"):
         redirect("/login")
-
-    
+        
     logs = readfile()
     return render_template("home1.html", logs=logs)
 
