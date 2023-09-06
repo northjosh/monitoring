@@ -50,11 +50,11 @@ def writefile(data):
      
     try:
         new = open(f"./logs/{date}.txt", 'x')
-        new.write(f"{d_time}::{data['payload']}\n")
+        new.write(f"{data['payload']}\n")
         new.close()
     except FileExistsError:
         new = open(f"./logs/{date}.txt", 'a')
-        new.write(f"{d_time}::{data['payload']}\n")
+        new.write(f"{data['payload']}\n")
         new.close()
 
 

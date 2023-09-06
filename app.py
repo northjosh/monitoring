@@ -1,24 +1,22 @@
 from flask import Flask, request, render_template, redirect, session, jsonify
-import requests
-from datetime import datetime
 from flask_mqtt import Mqtt
-from log import Log
+
 from readwrite import readfile, writefile
 
-# r = requests.get()
-
 notifications = False
-
 from flask_session import Session
-
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['MQTT_BROKER_URL'] = '197.255.72.187'
-app.config['MQTT_BROKER_PORT'] = 1883
+app.config['MQTT_BROKER_URL'] = 'rff11281.ala.us-east-1.emqxsl.com'
+app.config['MQTT_BROKER_PORT'] = 8883
 app.config['MQTT_KEEPALIVE'] = 5
-app.config['MQTT_TLS_ENABLED'] = False
+app.config['MQTT_USERNAME'] = 'jujutsu'
+app.config['MQTT_PASSWORD'] = 'jujutsu'
+app.config['MQTT_TLS_ENABLED'] = True
+app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
+app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG'
 
 
 Session(app)
@@ -95,9 +93,12 @@ def home():
     return render_template("home1.html", logs=logs)
 
 
-@app.route("/activity/<date>", methods=["GET"])
+@app.route("/activity/?picker=<date>", methods=["GET"])
 def activity(date):
+
+#    date = request.form['picker']
+   print(date)
+
    activity = readfile(date)
 
    return(render_template("home2.html", activity=activity))
-
