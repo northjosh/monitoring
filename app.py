@@ -100,4 +100,4 @@ def activity():
 
    activity = readfile(date)
 
-   return(render_template("home2.html", activity=activity))
+   return(render_template("home2.html", activity=activity, date=date))

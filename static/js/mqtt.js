@@ -29,11 +29,34 @@ client.on('connect', function () {
 // Receive messages
 client.on('message', function (topic, message) {
   // message is Buffer
+
+  split = message.toString().split("::")
+
+  // console.log(split[0]);
+  // console.log(split[1]);
+
+// Assuming you have a reference to the parent element with class "list"
+  const parentElement = document.createElement('div');
+  parentElement.className = 'list'
+
+  const notificationElement = document.createElement('div');
+  notificationElement.className = 'notification';
+
+  const messageElement = document.createElement('div');
+  messageElement.className = 'message';
+  messageElement.textContent = split[1]; // Set the content dynamically
+
+  const dateElement = document.createElement('div');
+  dateElement.className = 'date';
+  dateElement.textContent = split[0]; // Set the content dynamically
+
+  parentElement.appendChild(notificationElement);
+  parentElement.appendChild(messageElement);
+  parentElement.appendChild(dateElement);
+
+  logs_container.prepend(parentElement)
+        
   console.log(message.toString())
-//   alert(message.toString())
 
 //   client.end()
 })
-
-
-

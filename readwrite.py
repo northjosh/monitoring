@@ -26,7 +26,7 @@ def readfile(date=get_date()):
 
     """
 
-    print()
+    print(date)
 
     logs = []
 
