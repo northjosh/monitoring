@@ -1,5 +1,5 @@
 
-const url = 'wss://rff11281.ala.us-east-1.emqxsl.com:8084/mqtt'
+const url = ''
 
 const options = {
   // Clean session
@@ -19,7 +19,6 @@ client.on('connect', function () {
   client.subscribe('motion', function (err) {
     if (!err) {
       // Publish a message to a topic
-      client.publish('motion', 'Hello mqtt')
     }
   })
 })
@@ -28,6 +27,10 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
   // message is Buffer
   console.log(message.toString())
+//   alert(message.toString())
 
 //   client.end()
 })
+
+
+
