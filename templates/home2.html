@@ -107,14 +107,15 @@
     <div class="welcome">
         Logs for {{date}}!
     </div>
+      <input type="date" name="picker" min='2023-09-06' id="date">
     <div class="innerframe">
-      {{%- for log in logs %}}
+      {%for log in activity%}
         <div class="list"> 
             <div class="notification"></div>
             <div class="message">log.message</div>
             <div class="date">log.time</div>
         </div>
-        {{%- endfor %}}
+        {%endfor %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
