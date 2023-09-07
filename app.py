@@ -9,13 +9,13 @@ app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['MQTT_BROKER_URL'] = 'rff11281.ala.us-east-1.emqxsl.com'
-app.config['MQTT_BROKER_PORT'] = 8883
+app.config['MQTT_BROKER_URL'] = '192.168.11.2'
+app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_KEEPALIVE'] = 5
-app.config['MQTT_USERNAME'] = 'jujutsu'
-app.config['MQTT_PASSWORD'] = 'jujutsu'
+# app.config['MQTT_USERNAME'] = 'jujutsu'
+# app.config['MQTT_PASSWORD'] = 'jujutsu'
 app.config['MQTT_TLS_ENABLED'] = False
-app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
+# app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
 app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG'
 
 

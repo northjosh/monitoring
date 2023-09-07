@@ -1,6 +1,9 @@
 
 const url = 'wss://rff11281.ala.us-east-1.emqxsl.com:8084/mqtt'
 
+const logs_container = document.getElementById('logs_container')
+
+
 const options = {
   // Clean session
   clean: true,
@@ -18,8 +21,7 @@ client.on('connect', function () {
   /
   client.subscribe('motion', function (err) {
     if (!err) {
-      // Publish a message to a topic
-      client.publish('motion', 'Hello mqtt')
+      console.log("Subscribed")
     }
   })
 })
@@ -27,6 +29,33 @@ client.on('connect', function () {
 // Receive messages
 client.on('message', function (topic, message) {
   // message is Buffer
+
+  split = message.toString().split("::")
+
+  // console.log(split[0]);
+  // console.log(split[1]);
+
+// Assuming you have a reference to the parent element with class "list"
+  const parentElement = document.createElement('div');
+  parentElement.className = 'list'
+
+  const notificationElement = document.createElement('div');
+  notificationElement.className = 'notification';
+
+  const messageElement = document.createElement('div');
+  messageElement.className = 'message';
+  messageElement.textContent = split[1]; // Set the content dynamically
+
+  const dateElement = document.createElement('div');
+  dateElement.className = 'date';
+  dateElement.textContent = split[0]; // Set the content dynamically
+
+  parentElement.appendChild(notificationElement);
+  parentElement.appendChild(messageElement);
+  parentElement.appendChild(dateElement);
+
+  logs_container.appendChild(parentElement)
+        
   console.log(message.toString())
 
 //   client.end()
