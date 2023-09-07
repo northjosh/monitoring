@@ -4,8 +4,16 @@ const datePicker = document.getElementById('picker')
 const date = new Date()
 const current = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`
 
-
 datePicker.value = current 
+datePicker.max = current
+
+
+datePicker.addEventListener('change', (e) =>{
+    console.log(e.srcElement.value);
+
+})
+
+
 
 
 
