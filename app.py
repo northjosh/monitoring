@@ -15,8 +15,8 @@ app.config['MQTT_KEEPALIVE'] = 5
 # app.config['MQTT_USERNAME'] = 'jujutsu'
 # app.config['MQTT_PASSWORD'] = 'jujutsu'
 app.config['MQTT_TLS_ENABLED'] = False
-# app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
-app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG'
+app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
+app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG' 
 
 
 Session(app)
