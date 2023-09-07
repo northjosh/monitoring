@@ -12,9 +12,6 @@ webhook_url = "https://maker.ifttt.com/trigger/Motion/json/with/key/oYNmTH4HE1AQ
 yellow_led = LED(4)
 
 
-while Connected != True:
-    time.sleep(0.1)
-
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to broker")
@@ -23,6 +20,7 @@ def on_connect(client, userdata, flags, rc):
 
     else:
         print("Connection failed")
+
 
 def send_message():
     today = datetime.utcnow()
@@ -53,6 +51,10 @@ def no_motion_function():
 
 Connected = False  
 
+while Connected != True:
+    time.sleep(0.1)
+
+
 client = mqtt.Client()
 client.on_connect = on_connect
 client.connect("197.255.72.183", 1883, 60)
@@ -60,9 +62,6 @@ client.loop_start()
 
 pir.when_motion = motion_function
 pir.when_no_motion = no_motion_function
-
-
-
 
 
 # try:
