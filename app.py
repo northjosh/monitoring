@@ -14,7 +14,7 @@ app.config['MQTT_BROKER_PORT'] = 8883
 app.config['MQTT_KEEPALIVE'] = 5
 app.config['MQTT_USERNAME'] = 'jujutsu'
 app.config['MQTT_PASSWORD'] = 'jujutsu'
-app.config['MQTT_TLS_ENABLED'] = False
+app.config['MQTT_TLS_ENABLED'] = True
 app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
 app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG' 
 
@@ -93,11 +93,10 @@ def home():
     return render_template("home1.html", logs=logs)
 
 
-@app.route("/activity/?picker=<date>", methods=["GET"])
-def activity(date):
-
-#    date = request.form['picker']
-   print(date)
+@app.route("/activity/", methods=["GET"])
+def activity():
+   
+   date = request.args.get("picker")
 
    activity = readfile(date)
 

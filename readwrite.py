@@ -2,8 +2,12 @@
 from datetime import datetime
 from log import Log
 
-today = datetime.utcnow()
-date = today.strftime("%Y-%m-%d")
+
+def get_date():
+    today = datetime.utcnow()
+    date = today.strftime("%Y-%m-%d")
+
+    return date
 
 # class Log:
 #     def __init__(self, time, message):
@@ -14,7 +18,7 @@ date = today.strftime("%Y-%m-%d")
 #         return f"{self.time}: {self.message}"
         
 
-def readfile(date=date):
+def readfile(date=get_date()):
 
     """
 
@@ -22,21 +26,25 @@ def readfile(date=date):
 
     """
 
-    print(date)
+    print()
 
     logs = []
 
     with open(f"./logs/{date}.txt", 'r') as f:
         file = [x.strip() for x in f.readlines()]
     
-    for f in file:
-        f = f.split("::")
-        logs.append(Log(f[0], f[1]))
+    if len(file) != 0:
+        for f in file:
+            f = f.split("::")
+            logs.append(Log(f[0], f[1]))
+    else:
+        logs = [f":: No Activities for {date} "]
+
     
     print("Logs read")
+    print(logs)
+    logs.reverse()
     return logs
-
-
 
 def writefile(data):
 
@@ -58,7 +66,6 @@ def writefile(data):
         new = open(f"./logs/{date}.txt", 'a')
         new.write(f"{data['payload']}\n")
         new.close()
-
 
 
 # writefile({"topic": "hello", "payload": "Motion "})

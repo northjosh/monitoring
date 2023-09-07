@@ -43,7 +43,7 @@ try:
 
         now = today.strftime("%d/%m/%Y %H:%M:%S")
         message = f'Motion Detected at your door'
-        client.publish(topic, f"{now} : {message}")
+        client.publish(topic, f"{now} :: {message}")
         # print("message sent")
         print(message)
         time.sleep(1)
