@@ -11,6 +11,15 @@
         .titlebar{
             background-color: #D2DE32;
         }
+        .shift{
+            position: relative;
+            left: 700px;
+        }
+        .datesearch{
+            border-radius: 5px;
+            position: relative;
+            right: 100px;
+        }
         .body {
             margin: 0;
             padding: 0;
@@ -23,9 +32,9 @@
         }
         .innerframe{
             background-color: #016A70;
-            min-height: 100000px;
+            min-height: 150px;
             margin: 14% 20%;
-            /* height: 900px; */
+            /* height: auto; */
             border-radius: 20px;
             flex-wrap: wrap;
             display: flex;
@@ -104,12 +113,13 @@
                       <li class="nav-item">
                         <a class="nav-link" href="#">All logs</a>
                       </li>
-                      <li class="nav-item dropdown">
+                      <li class="nav-item">
+                        <a class="nav-link  shift" href="#">Search Logs by Date</a>
                       </li>
                     </ul>
-                    <p class="picklabel">View Logs for Date</p>
+                    <!-- <p class="picklabel">View Logs for Date</p> -->
                     <form action="/activity/" method="get">
-                        <input type="date" name="picker"  min='2023-09-06' id="picker">
+                        <input type="date" name="picker"  min='2023-09-06' class="datesearch" id="picker">
                         <button class="btn btn-primary" type="submit" id="pick">Find</button>
                     </form>
                     <form class="d-flex logoutcolor"  action="/logout" method="get">
@@ -121,13 +131,13 @@
             </div>
         <h3 id="activity"> Today's Activity</h3>
 
-    <div class="innerframe">
+    <div class="innerframe" id="logs_container">
+
         {%for log in logs%}
         <div class="list"> 
             <div class="notification"></div>
             <div class="message">{{log.message}}</div>
             <div class="date">{{log.time}}</div>
-            
         </div>
         {%endfor%}
     </div>

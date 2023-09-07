@@ -1,5 +1,8 @@
 
-const url = ''
+const url = 'wss://rff11281.ala.us-east-1.emqxsl.com:8084/mqtt'
+
+const logs_container = document.getElementById('logs_container')
+
 
 const options = {
   // Clean session
@@ -18,7 +21,7 @@ client.on('connect', function () {
   /
   client.subscribe('motion', function (err) {
     if (!err) {
-      // Publish a message to a topic
+      console.log("Subscribed")
     }
   })
 })
