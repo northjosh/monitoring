@@ -9,7 +9,7 @@ tz_gh = pytz.timezone('Africa/Accra')
 
 
 broker = 'rff11281.ala.us-east-1.emqxsl.com'
-port = 1883
+port = 8883
 topic = 'motion'
 client_id = f'jujutsu-server'
 username = 'jujutsu'

@@ -22,6 +22,8 @@ def readfile(date=date):
 
     """
 
+    print(date)
+
     logs = []
 
     with open(f"./logs/{date}.txt", 'r') as f:
@@ -59,6 +61,5 @@ def writefile(data):
 
 
 
-writefile({"topic": "hello", "payload": "Motion "})
-
+# writefile({"topic": "hello", "payload": "Motion "})
 # readfile("2023-09-06")
