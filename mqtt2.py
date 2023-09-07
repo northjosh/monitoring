@@ -17,7 +17,7 @@ def on_connect(client, userdata, flags, rc):
 
 client = mqtt.Client()
 client.on_connect = on_connect
-client.connect("197.255.72.183", 1883, 60)
+client.connect("192.168.11.2", 1883, 60)
 client.loop_start()
 
 tz_gh = pytz.timezone('Africa/Accra')
