@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, session, jsonify, abort
 from flask_mqtt import Mqtt
+from datetime import timedelta
 
 from readwrite import readfile, writefile
 
@@ -8,11 +9,13 @@ from flask_session import Session
 app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=1)
 app.config["SESSION_TYPE"] = "filesystem"
 app.config['MQTT_BROKER_URL'] = 'broker.hivemq.com'
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_KEEPALIVE'] = 5
 app.config['MQTT_TLS_ENABLED'] = False
+app.secret_key = 'hif893790qfh7940fhh12334bbfhlls'
 
 
 
@@ -61,6 +64,7 @@ def login():
         elif keys.get(request.form["username"]) != request.form['password']:
             return render_template('login.html', message="Invalid Password")
         else:
+            session["username"] = request.form["username"]
             return redirect("/")
 
 
@@ -75,8 +79,7 @@ def logout():
 
     """
 
-    session["name"] = None
-
+    session["username"] = None
     return redirect("/login")
 
 
@@ -84,8 +87,8 @@ def logout():
 def home():
     """ Returns the user homepage"""
 
-    if not session.get("name"):
-        redirect("/login")
+    if session.get("username") == None:
+        return redirect("/login")
         
     logs = readfile()
     return render_template("home1.html", logs=logs)
