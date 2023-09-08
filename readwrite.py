@@ -31,10 +31,10 @@ def readfile(date=get_date()):
                     f = f.split("::")
                     logs.append(Log(f[0], f[1]))
             else:
-                logs = [Log(date, f"No Activity for {date}")]
+                logs = [Log(date, f"No Activity")]
 
     except FileNotFoundError:
-        logs = [Log(date, f"No Activity for {date}")]
+        logs = [Log(date, f"No Activity")]
     
    
     print("Logs read")
