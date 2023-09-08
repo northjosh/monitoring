@@ -1,89 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        .body{
+        .body {
             background-image: url(../static/images/flipped.jpeg);
             background-size: cover;
             background-repeat: no-repeat;
             margin: 14% 25%;
-            overflow-x:hidden;
+            overflow-x: hidden;
             overflow-y: hidden;
 
         }
-        .mycontainer{
+
+        .mycontainer {
             width: 650px;
             height: 470px;
             margin: 4% 7%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column; 
+            flex-direction: column;
             border-radius: 20px;
             background-color: white;
             box-shadow: 2px 2px 2px 2px #929292
         }
-        .log{
+
+        .log {
             margin: 2% 4%;
         }
-        .button{
-            margin: 2% 30% ;
+
+        .button {
+            margin: 2% 30%;
         }
-        .logo{
+
+        .logo {
             background-image: url(../static/images/Screenshot\ 2023-09-04\ 152111.png);
             background-size: cover;
             width: 150px;
             height: 150px;
             margin-bottom: 50px;
         }
-        .alert-warning{
+
+        .alert-warning {
             border-color: rgb(31, 109, 210);
         }
-        .alert{
-            width: 1489px;
-            height: auto;
-            position: relative;
-            right: 390px;
-            bottom: 210px;
-            background-color: rgb(31, 109, 210);
-        }
-        
-        </style>
-    
 
-<title>Hello, world!</title>
+        .alert {
+            width: 50%;
+            height: auto;
+            position: absolute;
+            left: 20%;
+            top: 10%;
+            background-color: rgb(31, 109, 210);
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+            visibility: hidden;
+        }
+
+        .container-md {
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <title>Login - Jujutsu Security</title>
 </head>
+
 <body class="body">
-    <div  class="container-md ">
-          <div class="alert alert-warning alert-dismissible fade show alert" style="background-color: #a3c5f7; border-color:#a3c5f7" role="alert">
-            <strong>Wrong entry!</strong> 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
+    <div class="alert alert-warning alert-dismissible fade show alert"
+        style="background-color: #a3c5f7; border-color:#a3c5f7; position: abssolute; visibility: hidden;" role="alert" id="alert">
+        <strong id="alert-msg">{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="container-md mb-lg-0">
         <div class="mycontainer">
             <div class="logo"></div>
             <div class="log">
-                <form action="/" method="post">
+                <form action="/login" method="post">
                     <div class="mb-3">
-                      <input type="text"name = "username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+                        <input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Username">
                     </div>
                     <div class="mb-3">
-                      <input type="password" name = "password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                            placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary button">Login</button>
                 </form>
             </div>
-            </div>
         </div>
     </div>
-        
-      
-      
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-          crossorigin="anonymous"></script>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/login.js')}}"></script>
 </body>
+
 </html>

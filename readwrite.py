@@ -9,14 +9,7 @@ def get_date():
 
     return date
 
-# class Log:
-#     def __init__(self, time, message):
-#         self.time = time
-#         self.message = message
-    
-#     def __str__(self) -> str:
-#         return f"{self.time}: {self.message}"
-        
+
 
 def readfile(date=get_date()):
 
@@ -46,6 +39,7 @@ def readfile(date=get_date()):
     logs.reverse()
     return logs
 
+
 def writefile(data):
 
     '''
@@ -53,7 +47,7 @@ def writefile(data):
     Writes activity to the logfile for current date
 
     '''
-
+    
     today = datetime.utcnow()
     d_time = today.strftime("%d/%m/%Y %H:%M:%S")
     date = today.strftime("%Y-%m-%d")
@@ -66,7 +60,3 @@ def writefile(data):
         new = open(f"./logs/{date}.txt", 'a')
         new.write(f"{data['payload']}\n")
         new.close()
-
-
-# writefile({"topic": "hello", "payload": "Motion "})
-# readfile("2023-09-06")
