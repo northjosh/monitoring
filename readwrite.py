@@ -26,19 +26,19 @@ def readfile(date=get_date()):
     try:
         with open(f"./logs/{date}.txt", 'r') as f:
             file = [x.strip() for x in f.readlines()]
-            
             if len(file) != 0:
                 for f in file:
                     f = f.split("::")
                     logs.append(Log(f[0], f[1]))
-                else:
-                    logs = [f":: No Activities for {date} "]
+            else:
+                logs = [Log(date, f"No Activity for {date}")]
 
     except FileNotFoundError:
-        logs = [f":: No Activities for {date} "]
+        logs = [Log(date, f"No Activity for {date}")]
     
    
     print("Logs read")
+    print(logs)
     logs.reverse()
     return logs
 
