@@ -13,7 +13,7 @@
             background-image: url(../static/images/flipped.jpeg);
             background-size: cover;
             background-repeat: no-repeat;
-            margin: 14% 25%;
+            margin: 50% 55%;
             overflow-x: hidden;
             overflow-y: hidden;
 
@@ -53,23 +53,26 @@
         }
 
         .alert {
-            width: 50%;
+            width: 1500px;
             height: auto;
             position: absolute;
-            left: 20%;
-            top: 10%;
+            right: 0.01%;
+            top: 0.05%;
             background-color: rgb(31, 109, 210);
             align-items: center;
             justify-content: center;
             justify-items: center;
-            visibility: hidden;
         }
 
         .container-md {
             position: absolute;
             top: 50%;
-            left: 60%;
+            left: 65%;
             transform: translate(-50%, -50%);
+        }
+        .alertmsgplacement{
+            position: relative;
+            left: 650px;
         }
     </style>
     <title>Login - Jujutsu Security</title>
@@ -78,7 +81,7 @@
 <body class="body">
     <div class="alert alert-warning alert-dismissible fade show alert"
         style="background-color: #a3c5f7; border-color:#a3c5f7; position: abssolute; visibility: hidden;" role="alert" id="alert">
-        <strong id="alert-msg">{{message}}</strong>
+        <strong id="alert-msg" class="alertmsgplacement">{{message}}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="container-md mb-lg-0">
