@@ -12,11 +12,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config['MQTT_BROKER_URL'] = 'broker.hivemq.com'
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_KEEPALIVE'] = 5
-# app.config['MQTT_USERNAME'] = 'jujutsu'
-# app.config['MQTT_PASSWORD'] = 'jujutsu'
 app.config['MQTT_TLS_ENABLED'] = False
-# app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
-# app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG' 
+
 
 
 Session(app)
@@ -59,15 +56,10 @@ def login():
     """
     
     if request.method == "POST":
-        username = request.form['username'] 
-        password = request.form['password']
-        pwd = keys.get(username) 
-        print(username, password)
-
-        if pwd == None:
-            return(render_template('login.html', message="Username does not exist"))
-        elif password != pwd:
-            return(render_template('login.html', message="Incorrect Password"))
+        if keys.get(request.form["username"]) == None:
+            return render_template("login.html",message="User does not exist")
+        elif keys.get(request.form["username"]) != request.form['password']:
+            return render_template('login.html', message="Invalid Password")
         else:
             return redirect("/")
 
@@ -109,7 +101,7 @@ def activity():
    except FileNotFoundError:
        abort(404)
 
-   return(render_template("home2.html", activity=activity))
+   return(render_template("home2.html", activity=activity, date=date))
 
 
 @app.errorhandler(404)
