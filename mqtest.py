@@ -8,9 +8,9 @@ from datetime import datetime
 tz_gh = pytz.timezone('Africa/Accra') 
 
 
-broker = 'rff11281.ala.us-east-1.emqxsl.com'
-port = 8883
-topic = 'motion'
+broker = 'broker.hivemq.com'
+port = 1883
+topic = 'jujutsu/motion'
 client_id = f'jujutsu-server'
 username = 'jujutsu'
 password = 'jujutsu'
@@ -29,7 +29,7 @@ Connected = False
 
 client = mqtt.Client(client_id)
 client.username_pw_set(username, password)
-client.tls_set(ca_certs='./emqxsl-ca.crt')
+# client.tls_set(ca_certs='./emqxsl-ca.crt')
 client.on_connect = on_connect
 client.connect(broker, port, 60)
 client.loop_start()  

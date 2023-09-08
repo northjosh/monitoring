@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, session, jsonify
+from flask import Flask, request, render_template, redirect, session, jsonify, abort
 from flask_mqtt import Mqtt
 
 from readwrite import readfile, writefile
@@ -9,27 +9,27 @@ app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['MQTT_BROKER_URL'] = '192.168.11.2'
+app.config['MQTT_BROKER_URL'] = 'broker.hivemq.com'
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_KEEPALIVE'] = 5
 # app.config['MQTT_USERNAME'] = 'jujutsu'
 # app.config['MQTT_PASSWORD'] = 'jujutsu'
 app.config['MQTT_TLS_ENABLED'] = False
-app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
-app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG' 
+# app.config['MQTT_TLS_CA_CERTS'] = './emqxsl-ca.crt'
+# app.config['MQTT_LOG_LEVEL'] = 'logging.DEBUG' 
 
 
 Session(app)
 mqtt_client = Mqtt(app)
 
-keys = {"josh": "josh123"}
+keys = {"jujutsu": "jujutsu"}
 
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
     if rc == 0:
         print('Connected')
-        mqtt_client.subscribe("motion")
+        mqtt_client.subscribe("jujutsu/motion")
     else:
         print("Couldn't connect. Error Code:", rc)
 
@@ -57,15 +57,21 @@ def login():
     Handles user authentication 
 
     """
+    
     if request.method == "POST":
-        if keys.get(request.form["username"]) == None:
-            return render_template("login.html",message="User does not exist")
-        elif keys.get(request.form["username"]) != request.form['password']:
-            return render_template('login.html', message="Invalid Password")
+        username = request.form['username'] 
+        password = request.form['password']
+        pwd = keys.get(username) 
+        print(username, password)
+
+        if pwd == None:
+            return(render_template('login.html', message="Username does not exist"))
+        elif password != pwd:
+            return(render_template('login.html', message="Incorrect Password"))
         else:
-            session['name'] = request.form['username']
             return redirect("/")
-        
+
+
     return render_template('login.html')
 
 
@@ -98,6 +104,19 @@ def activity():
    
    date = request.args.get("picker")
 
-   activity = readfile(date)
+   try:
+       activity = readfile(date)
+   except FileNotFoundError:
+       abort(404)
 
    return(render_template("home2.html", activity=activity))
+
+
+@app.errorhandler(404)
+def not_found(e):
+  return render_template('404.html'), 404 
+
+
+@app.errorhandler(500)
+def not_found(e):
+  return render_template('500.html'), 500 
