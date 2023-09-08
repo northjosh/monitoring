@@ -46,7 +46,6 @@ def publish():
 
     return jsonify({'code': result[0]})
 
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
