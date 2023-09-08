@@ -17,7 +17,7 @@ def on_connect(client, userdata, flags, rc):
 
 client = mqtt.Client()
 client.on_connect = on_connect
-client.connect("192.168.11.2", 1883, 60)
+client.connect("broker.hivemq.com", 1883, 60)
 client.loop_start()
 
 tz_gh = pytz.timezone('Africa/Accra')
@@ -31,7 +31,7 @@ def send_message():
     localized_time = today.astimezone(tz_gh)
     now = localized_time.strftime("%d/%m/%Y %H:%M:%S")
     message = f'Motion Detected'
-    client.publish("motion", f"{now}: {message}")
+    client.publish("jujutsu/motion", f"{now}:: {message}")
 
 def motion_function():
     yellow_led.on()
